@@ -39,28 +39,35 @@ end
 
 
 
+for i = 1:length(K_values)
+    K = K_values(i);
+    
+    % Extract the solutions for each method
+    rk4_solution = rk4_solutions{i};
+    euler_solution = euler_solutions{i};
+    adams_solution = adams_solutions{i};
+    ode45_solution = ode45_solutions{i};
+    
+    % Create a new figure for each K
+    figure;
 
+    % Plot RK4 Solution
+    plot(tspan, rk4_solution(1,:), 'b', 'DisplayName', 'RK4');
+    hold on;
 
+    % Plot Euler Solution
+    plot(tspan, euler_solution(1,:), 'r', 'DisplayName', 'Euler');
 
+    % Plot Adams-Moulton Solution
+    plot(tspan, adams_solution(1,:), 'g', 'DisplayName', 'Adams-Moulton');
 
-% Example plot for a single K value
-% plot(t_ref, ode45_solution(:,1), 'k', 'DisplayName', 'ode45');
-% hold on;
-% plot(tspan, rk4_solution(1,:), 'b', 'DisplayName', 'RK4');
-% plot(tspan, euler_solution(1,:), 'r', 'DisplayName', 'Euler');
-% plot(tspan, adams_solution(1,:), 'g', 'DisplayName', 'Adams-Moulton');
-% hold off;
-% xlabel('Time');
-% ylabel('Solution');
-% title(['Solution Comparison for K = ', num2str(K)]);
-% legend;
+    % Plot ode45 Solution
+    plot(ode45_solution(:,1), ode45_solution(:,2), 'k', 'DisplayName', 'ode45');
 
-
-% % Example error plot for RK4 and a single K value
-% plot(tspan, rk4_errors(2,:), 'b');
-% % plot(tspan, euler_errors(2,:), 'b');
-% xlabel('Time');
-% ylabel('Error');
-% title(['RK4 Error for K = ', num2str(K)]);
-
-
+    % Customize the plot
+    title(['Solutions for K = ', num2str(K)]);
+    xlabel('Time');
+    ylabel('Solution');
+    legend;
+    hold off;
+end
